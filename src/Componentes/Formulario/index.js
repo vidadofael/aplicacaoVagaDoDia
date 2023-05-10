@@ -4,39 +4,8 @@ import CampoTexto from "../CampoTexto";
 import ListaSuspensa from "../ListaSuspensa";
 import "./Formulario.css";
 
-const Formulario = () => {
-  const VagaPretendida = [
-    "Comerciante",
-    "Motorista",
-    "Vendedor",
-    "Trabalhador doméstico",
-    "Autônomo",
-    "Operador de máquinas",
-    "Ajudante de obras",
-    "Operador de telemarketing",
-    "Recepcionista",
-    "Costureira",
-    "Professor",
-    "Pedreiro",
-    "Eletricista",
-    "Assistente administrativo",
-    "Atendente de loja",
-    "Auxiliar de limpeza",
-    "Cozinheiro",
-    "Garçom",
-    "Técnico de enfermagem",
-    "Vigilante",
-    "Técnico em informática",
-    "Mecânico",
-    "Auxiliar de produção",
-    "Carpinteiro",
-    "Encanador",
-    "Porteiro",
-    "Estoquista",
-    "Recepcionista de consultório médico ou dentário",
-    "Cuidador de idosos",
-    "Auxiliar de escritório",
-  ];
+const Formulario = (props) => {
+  
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -47,6 +16,14 @@ const Formulario = () => {
 
   const aoSalvar = (evento) => {
     evento.preventDefault();
+    props.aoCandidatoCadastrado({
+      nome,
+      email,
+      cidade,
+      estado,
+      curriculo,
+      vaga
+    })
     console.log('Form foi submetido =>', nome, email, cidade, estado, curriculo, vaga);
   };
 
@@ -92,7 +69,7 @@ const Formulario = () => {
         <ListaSuspensa
           obrigatorio={true}
           label="Vaga Pretendida"
-          itens={VagaPretendida}
+          itens={props.vagaPretendida}
           valor={vaga}
           aoAlterado={(valor) => setVaga(valor)}
         />
